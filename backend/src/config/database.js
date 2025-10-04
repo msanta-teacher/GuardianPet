@@ -1,19 +1,17 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+import mysql from 'mysql2/promise';
 
-const mongoURI = process.env.DB_URI || 'mongodb://127.0.0.1:27017/guardianpet';
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('Conexión a la base de datos MongoDB establecida');
-  } catch (error) {
-    console.error('Error al conectar a la base de datos:', error);
-    process.exit(1); // Detiene la app si falla la conexión
-  }
-};
+const pool = mysql.createPool({
+host: process.env.DB_HOST,
+user: process.env.DB_USER,
+password: process.env.DB_PASSWORD,
+database: process.env.DB_NAME,
+port: Number(process.env.DB_PORT || 3306),
+waitForConnections: true,
+connectionLimit: 10,
+queueLimit: 0,
+dateStrings: true,
+});
 
-module.exports = connectDB;
+
+export default pool;

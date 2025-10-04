@@ -1,6 +1,10 @@
-const app = require('./src/app');
-const PORT = process.env.PORT || 3001;
+import dotenv from 'dotenv';
+dotenv.config();
+import { createServer } from 'http';
+import app from './utils/app.js';
 
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en puerto ${PORT}`);
+
+const port = process.env.PORT || 4000;
+createServer(app).listen(port, () => {
+console.log(`[guardianpet] API escuchando en http://localhost:${port}`);
 });
