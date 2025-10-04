@@ -1,0 +1,13 @@
+PORT=4000
+NODE_ENV=development
+# DB
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=guardianpet
+# JWT
+JWT_SECRET=supersecreto_largo_y_unico
+JWT_EXPIRES_IN=1d
+# CORS
+CORS_ORIGIN=http://localhost:5173
