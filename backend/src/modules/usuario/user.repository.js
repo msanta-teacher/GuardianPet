@@ -5,8 +5,7 @@ const selectPublic = {
   nombre: true,
   email: true,
   telefono: true,
-  rol: true,
-  creadoEn: true,
+  rol: true
 };
 const base = createCrudRepository("usuario", {
   defaultSelect: selectPublic,
