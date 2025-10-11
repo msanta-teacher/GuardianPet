@@ -3,15 +3,16 @@ import { hashPassword, comparePassword } from "../../utils/crypto.js";
 import repo from "./user.repository.js";
 
 export default {
-  async registrar({ nombre, email, telefono, contraseña, rol = "usuario" }) {
+  async registrar({ nombre, email, telefono, contrasena, rol = "usuario" }) {
     if (await repo.existsEmail(email))
       throw new Error("El email ya está registrado");
-    const hash = await hashPassword(contraseña);
-    return repo.create({ nombre, email, telefono, hash, rol });
+    const hash = await hashPassword(contrasena);
+    contrasena = hash;
+    return repo.create({ nombre, email, telefono, contrasena, rol });
   },
-  async login({ email, contraseña }) {
+  async login({ email, contrasena }) {
     const user = await repo.findByEmail(email);
-    if (!user || !(await comparePassword(contraseña, user.hash)))
+    if (!user || !(await comparePassword(contrasena, user.contrasena)))
       throw new Error("Credenciales inválidas");
     const token = jwt.sign(
       { sub: user.id, email: user.email, rol: user.rol },
@@ -28,9 +29,9 @@ export default {
     return repo.list(params);
   },
   async actualizar(id, data) {
-    if (data.contraseña) {
-      data.hash = await hashPassword(data.contraseña);
-      delete data.contraseña;
+    if (data.contrasena) {
+      data.hash = await hashPassword(data.contrasena);
+      delete data.contrasena;
     }
     return repo.update(id, data);
   },
