@@ -11,17 +11,33 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-login',
   imports: [CommonModule, FormsModule, RouterLink],
   template: `
-  <div class="card">
-    <h2>Iniciar sesión</h2>
-    <form (ngSubmit)="onSubmit()">
-      <label>Email</label>
-      <input [(ngModel)]="email" name="email" type="email" required/>
-      <label>Contraseña</label>
-      <input [(ngModel)]="contrasena" name="contrasena" type="contrasena" required/>
-      <button type="submit" [disabled]="loading">Entrar</button>
-    </form>
-    <a routerLink="/registro">Crear cuenta</a>
-    <p class="error" *ngIf="error">{{error}}</p>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h2 class="h4 mb-4 text-center">Iniciar sesión</h2>
+
+            <form (ngSubmit)="onSubmit()" class="vstack gap-3">
+              <div>
+                <label class="form-label">Email</label>
+                <input class="form-control" [(ngModel)]="email" name="email" type="email" required>
+              </div>
+
+              <div>
+                <label class="form-label">Contraseña</label>
+                <input class="form-control" [(ngModel)]="contrasena" name="contrasena" type="contrasena" required>
+              </div>
+
+              <button class="btn btn-primary w-100" type="submit" [disabled]="loading">Entrar</button>
+            </form>
+
+            <a routerLink="/registro" class="d-block text-center mt-3">Crear cuenta</a>
+            <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>`,
   styles:[`.card{max-width:380px;margin:4rem auto;padding:1.5rem;border:1px solid #eee;border-radius:12px} .error{color:#c62828}`]
 })

@@ -9,10 +9,12 @@ import { AuthService, User } from '../../core/services/auth.service';
   template: `
   <div class="page">
     <h2>Home</h2>
-    <ng-container *ngIf="me; else notLogged">
-      <p>Hola, {{me?.nombre}} ({{me?.email}})</p>
+    <ng-container *ngIf="me as u; else notLogged">
+      <p>Hola, {{ u.nombre }} ({{ u.email }})</p>
     </ng-container>
-    <ng-template #notLogged><p>No autenticado.</p></ng-template>
+    <ng-template #notLogged>
+      <p>No autenticado.</p>
+    </ng-template>
   </div>`
 })
 export class HomeComponent implements OnInit{
