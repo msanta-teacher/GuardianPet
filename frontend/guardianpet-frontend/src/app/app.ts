@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // 👇 agrega RouterLinkActive aquí
   imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf],
   template: `
     <!-- tu nav aquí (Bootstrap o CSS puro) -->
@@ -47,6 +46,9 @@ import { AuthService } from './core/services/auth.service';
   `
 })
 export class AppComponent {
-  constructor(public auth: AuthService) {}
-  logout(){ this.auth.logout(); /* redirige como ya tenías */ }
+  constructor(public auth: AuthService, private router: Router) {}  // 👈 inyecta Router
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/login']);                               // 👈 ya existe this.router
+  }
 }

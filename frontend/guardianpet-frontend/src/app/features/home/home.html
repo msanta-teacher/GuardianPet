@@ -1,1 +1,118 @@
-<p>home works!</p>
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Bienvenida -->
+    <div class="col-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <ng-container *ngIf="loading; else loaded">
+            <div class="placeholder-glow">
+              <h2 class="h4 mb-2">
+                <span class="placeholder col-4"></span>
+              </h2>
+              <p class="mb-0">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-3 ms-2"></span>
+              </p>
+            </div>
+          </ng-container>
+
+          <ng-template #loaded>
+            <ng-container *ngIf="me as u; else notLogged">
+              <div class="d-flex align-items-center gap-3">
+                <div class="rounded-circle bg-primary-subtle text-primary d-flex
+                            align-items-center justify-content-center"
+                     style="width:56px;height:56px;font-weight:700;">
+                  {{ u.nombre.charAt(0) || 'U' }}
+                </div>
+                <div>
+                  <h2 class="h4 mb-1">Hola, {{ u.nombre }}</h2>
+                  <div class="text-secondary small">{{ u.email }}</div>
+                </div>
+                <span class="badge text-bg-success ms-auto">Sesión activa</span>
+              </div>
+            </ng-container>
+          </ng-template>
+
+          <ng-template #notLogged>
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-secondary-subtle text-secondary d-flex
+                          align-items-center justify-content-center"
+                   style="width:56px;height:56px;font-weight:700;">
+                ?
+              </div>
+              <div>
+                <h2 class="h5 mb-1">No autenticado</h2>
+                <div class="text-secondary">Inicia sesión para continuar.</div>
+              </div>
+              <a class="btn btn-primary ms-auto" routerLink="/login">Ir a Login</a>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats (opcionales) -->
+    <div class="col-12 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="text-secondary small">Mascotas registradas</div>
+          <div class="display-6 fw-semibold">{{ stats?.mascotas ?? 0 }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="text-secondary small">Vacunas próximas</div>
+          <div class="display-6 fw-semibold">{{ stats?.vacunas ?? 0 }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="text-secondary small">Citas del mes</div>
+          <div class="display-6 fw-semibold">{{ stats?.citas ?? 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <div class="col-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h3 class="h6 text-secondary mb-3">Acciones rápidas</h3>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary" routerLink="/mascotas/new">
+              + Nueva mascota
+            </a>
+            <a class="btn btn-outline-primary" routerLink="/mascotas">
+              Ver mascotas
+            </a>
+            <a class="btn btn-outline-secondary" routerLink="/perfil">
+              Mi perfil
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actividad reciente (placeholder) -->
+    <div class="col-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h3 class="h6 text-secondary mb-3">Actividad reciente</h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngIf="(recent?.length || 0) === 0">
+              <span class="text-secondary">Sin actividad por ahora.</span>
+            </li>
+            <li class="list-group-item" *ngFor="let it of recent">
+              {{ it }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
