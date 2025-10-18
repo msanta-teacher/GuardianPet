@@ -15,7 +15,7 @@ import { AuthService } from '../../../core/services/auth.service';
       <label>Email</label>
       <input [(ngModel)]="email" name="email" type="email" required/>
       <label>Contraseña</label>
-      <input [(ngModel)]="password" name="password" type="password" required/>
+      <input [(ngModel)]="contrasena" name="contrasena" type="contrasena" required/>
       <button type="submit" [disabled]="loading">Entrar</button>
     </form>
     <a routerLink="/registro">Crear cuenta</a>
@@ -25,7 +25,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class LoginComponent{
   email = '';
-  password = '';     // <- sin ñ
+  contrasena = '';     
   loading = false;
   error = '';
 
@@ -37,7 +37,7 @@ export class LoginComponent{
     this.error = '';
 
     // Enviamos la propiedad que espera el backend:
-    this.auth.login({ email: this.email, contraseña: this.password }).subscribe({
+    this.auth.login({ email: this.email, contrasena: this.contrasena }).subscribe({
       next: () => this.router.navigate(['/home']),
       error: (e) => { this.error = e?.error?.error || 'Error de login'; this.loading = false; }
     });

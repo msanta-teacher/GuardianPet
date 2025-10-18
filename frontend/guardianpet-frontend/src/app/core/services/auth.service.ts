@@ -19,13 +19,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(data: { email: string; contraseña: string; }): Observable<LoginResponse> {
+  login(data: { email: string; contrasena: string; }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.base}/login`, data).pipe(
       tap(res => localStorage.setItem(this.tokenKey, res.token))
     );
   }
 
-  registro(data: { nombre: string; email: string; telefono?: string; contraseña: string; rol?: string; }): Observable<User> {
+  registro(data: { cedula: number; nombre: string; email: string; telefono?: string; contrasena: string; rol?: string; }): Observable<User> {
     return this.http.post<User>(`${this.base}/registro`, data);
   }
 

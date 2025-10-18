@@ -12,6 +12,8 @@ import { AuthService } from '../../../core/services/auth.service';
   <div class="card">
     <h2>Crear cuenta</h2>
     <form (ngSubmit)="onSubmit()">
+      <label>Cedula</label>
+      <input [(ngModel)]="cedula" name="cedula" type="number" required/>
       <label>Nombre</label>
       <input [(ngModel)]="nombre" name="nombre" required/>
       <label>Email</label>
@@ -19,7 +21,7 @@ import { AuthService } from '../../../core/services/auth.service';
       <label>Teléfono</label>
       <input [(ngModel)]="telefono" name="telefono"/>
       <label>Contraseña</label>
-      <input [(ngModel)]="password" name="password" type="password" required/>
+      <input [(ngModel)]="contrasena" name="contrasena" type="contrasena" required/>
       <button type="submit">Registrarme</button>
     </form>
     <a routerLink="/login">Ya tengo cuenta</a>
@@ -32,7 +34,8 @@ export class RegisterComponent{
   nombre = '';
   email = '';
   telefono = '';
-  password = '';    // <- sin ñ
+  contrasena = '';
+  cedula = 0;   
   ok = false;
   error = '';
 
@@ -47,7 +50,8 @@ export class RegisterComponent{
       nombre: this.nombre,
       email: this.email,
       telefono: this.telefono,
-      contraseña: this.password   // <- aquí sí usamos 'contraseña' para la API
+      contrasena: this.contrasena,
+      cedula: this.cedula  
     })
     .subscribe({
       next: () => { this.ok = true; setTimeout(() => this.router.navigate(['/login']), 600); },
