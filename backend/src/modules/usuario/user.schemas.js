@@ -6,6 +6,7 @@ export const registerSchema = z.object({
     telefono: z.string().optional(),
     contrasena: z.string().min(6),
     rol: z.enum(["usuario", "admin"]).optional(),
+    cedula: z.int().min(6),
   }),
 });
 export const loginSchema = z.object({
