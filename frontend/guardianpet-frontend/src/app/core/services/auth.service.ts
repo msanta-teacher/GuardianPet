@@ -33,6 +33,10 @@ export class AuthService {
     return this.http.get<User>(`${this.base}/me`);
   }
 
-  logout(): void { localStorage.removeItem(this.tokenKey); }
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+  }
+
   get token(): string | null { return localStorage.getItem(this.tokenKey); }
+  get isLoggedIn(): boolean { return !!this.token; }
 }

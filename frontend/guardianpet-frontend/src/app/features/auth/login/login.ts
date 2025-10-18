@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
+
 
 @Component({
   standalone: true,
@@ -23,13 +25,14 @@ import { AuthService } from '../../../core/services/auth.service';
   </div>`,
   styles:[`.card{max-width:380px;margin:4rem auto;padding:1.5rem;border:1px solid #eee;border-radius:12px} .error{color:#c62828}`]
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit {
   email = '';
   contrasena = '';     
   loading = false;
   error = '';
 
   constructor(private auth: AuthService, private router: Router) {}
+  ngOnInit(){ if (this.auth.isLoggedIn) this.router.navigate(['/home']); }
 
   onSubmit(){
     if (this.loading) return;
