@@ -20,12 +20,12 @@ import { AuthService } from '../../../core/services/auth.service';
               <div>
                 <label class="form-label">Cédula</label>
                 <!-- usa text si puede tener ceros a la izquierda -->
-                <input class="form-control" [(ngModel)]="cedula" name="cedula" type="text" required />
+                <input class="form-control" [(ngModel)]="cedula" name="cedula" type="number" required />
               </div>
 
               <div>
                 <label class="form-label">Nombre</label>
-                <input class="form-control" [(ngModel)]="nombre" name="nombre" required />
+                <input class="form-control" [(ngModel)]="nombre" type="text" name="nombre" required />
               </div>
 
               <div>
@@ -35,7 +35,7 @@ import { AuthService } from '../../../core/services/auth.service';
 
               <div>
                 <label class="form-label">Teléfono</label>
-                <input class="form-control" [(ngModel)]="telefono" name="telefono" />
+                <input class="form-control" [(ngModel)]="telefono" name="telefono" type="text"/>
               </div>
 
               <div>
@@ -90,7 +90,7 @@ export class RegisterComponent {
       nombre: this.nombre,
       email: this.email,
       telefono: this.telefono,
-      contraseña: this.contrasena
+      contrasena: this.contrasena
     };
 
     this.auth.registro(payload).subscribe({
