@@ -1,4 +1,4 @@
 export const environment = {
-production: false,
+production: true,
 apiUrl: 'https://guardianpet.onrender.com/api'
 };
