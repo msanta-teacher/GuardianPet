@@ -14,7 +14,6 @@ model enfermedad {
   fecha_fin      DateTime        @db.DateTime(0)
   descripci_n    String          @map("descripción") @db.Text
   det_enfermedad det_enfermedad?
-  tratamiento    tratamiento?
 }
 
 model historial_clinico {
@@ -56,13 +55,12 @@ model operacion {
 }
 
 model tratamiento {
-  id               Int        @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   tipo             Int
-  fecha            DateTime   @db.DateTime(0)
+  fecha            DateTime @db.DateTime(0)
   fecha_fin        Int
-  descripci_n      String     @map("descripción") @db.Text
-  enfermedad_id_fk Int        @unique(map: "enfermedad_id_fk")
-  enfermedad       enfermedad @relation(fields: [enfermedad_id_fk], references: [id], onUpdate: Restrict, map: "tratamiento_ibfk_1")
+  descripci_n      String   @map("descripción") @db.Text
+  enfermedad_id_fk Int      @unique(map: "enfermedad_id_fk")
 }
 
 model usuario {
